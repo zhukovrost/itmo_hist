@@ -1,4 +1,5 @@
 class Route:
+    """Класс маршрута"""
     __slots__ = [
         'id',
         'name',
@@ -13,7 +14,7 @@ class Route:
         self.name = name
         self.description = description
         self.map_link = map_link
-        self.locations = []
+        self.locations = [] # Тут должны быть экземпляры класса models.Location
         self.photo = photo
 
     def __repr__(self):

@@ -2,7 +2,8 @@ import pandas as pd
 from models import *
 
 
-def _load_routes_from_excel(file_path="data/data.xlsx", l_locations="locations", l_routes="routes", l_relation="relations"):
+def _load_routes_from_excel(file_path="data/data.xlsx", l_locations="locations", l_routes="routes", l_relation="relations") -> dict[int, Route]:
+    """Функция, которая парсит Excel и возвращает словарь, где ключ -- идентификатор маршрута, а значение -- сам маршрут."""
     xls = pd.ExcelFile(file_path)
 
     # Чтение таблиц
@@ -34,7 +35,6 @@ def _load_routes_from_excel(file_path="data/data.xlsx", l_locations="locations",
         )
         locations[location.id] = location
 
-    # Привязываем локации к маршрутам
     for _, rl_row in route_locations_df.iterrows():
         route_id = rl_row['id_route']
         location_id = rl_row['id_location']
