@@ -20,7 +20,7 @@ def _load_routes_from_excel(file_path="data/data.xlsx", l_locations="locations",
             row.get('description', "Нет описания."),
             row.get('map_link', "Ссылка отсутствует."),
         )
-        photo_list = row.get('photo', "").split(",")
+        photo_list = str(row.get('photo', "")).split(",")
         for photo in photo_list:
             photo = photo.strip()
             if photo != "":
@@ -33,7 +33,7 @@ def _load_routes_from_excel(file_path="data/data.xlsx", l_locations="locations",
         location = Location(location_row['id'], location_row['name'], location_row['coords'],
                             location_row.get('description', "Нет описания."),
                             history=location_row.get('history', "Нет исторического описания."))
-        photo_list = location_row.get('photo', "").split(",")
+        photo_list = str(location_row.get('photo', "")).split(",")
         for photo in photo_list:
             photo = photo.strip()
             if photo != "":
