@@ -19,20 +19,26 @@ def _load_routes_from_excel(file_path="data/data.xlsx", l_locations="locations",
             row['name'],
             row.get('description', "Нет описания."),
             row.get('map_link', "Ссылка отсутствует."),
-            row.get("photo")
         )
+        photo_list = row.get('photo', "").split(",")
+        for photo in photo_list:
+            photo = photo.strip()
+            if photo != "":
+                route.add_photo(photo)
+
         routes[route.id] = route
 
     locations = {}
     for _, location_row in locations_df.iterrows():
-        location = Location(
-            location_row['id'],
-            location_row['name'],
-            location_row['coords'],
-            location_row.get('description', "Нет описания."),
-            history=location_row.get('history', "Нет исторического описания."),
-            photo=location_row.get('photo')
-        )
+        location = Location(location_row['id'], location_row['name'], location_row['coords'],
+                            location_row.get('description', "Нет описания."),
+                            history=location_row.get('history', "Нет исторического описания."))
+        photo_list = location_row.get('photo', "").split(",")
+        for photo in photo_list:
+            photo = photo.strip()
+            if photo != "":
+                location.add_photo(photo)
+
         locations[location.id] = location
 
     for _, rl_row in route_locations_df.iterrows():
